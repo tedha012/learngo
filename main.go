@@ -7,9 +7,11 @@ import (
 
 func main() {
 	c := make(chan string)
-	people := [2]string{"nico", "flynn"}
+	people := [5]string{"nico", "flynn", "ted", "bob", "johnny"}
 	for _, person := range people {
 		go isSexy(person, c)
+	}
+	for i := 0; i < len(people); i++ {
 		fmt.Println("Received this message", <-c)
 	}
 
@@ -17,6 +19,5 @@ func main() {
 
 func isSexy(person string, c chan string) {
 	time.Sleep(time.Second * 5)
-	fmt.Println(person)
 	c <- person + " is sexy"
 }
